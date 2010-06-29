@@ -29,9 +29,10 @@ void setup() {
 }
 
 void draw() {
-  
+  // brauchen wir wegen der keyPressed Funktionalität
 }
 
+// Funktion zum ausgeben der Daten in der Form eines Balkendiagramms
 void drawBarGraph(float dx, float dy, float dWidth, float dHeight, int[]dData) {
   float barWidth = dWidth / dData.length;
   stroke(255);
@@ -121,6 +122,7 @@ float sum(int[]dData) {
   return summe;
 }
 
+// Bild speichern wenn s gedrückt wurde
 void keyPressed() {
   if(key == 's') save("telefonbenutzung.png");
 }
