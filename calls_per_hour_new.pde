@@ -40,16 +40,20 @@ void drawBarGraph(float dx, float dy, float dWidth, float dHeight, int[]dData) {
   textFont(font);
   
   for(int i = 0; i < dData.length; i++) {
+    // Wert maßstäblich einordnen
     float value = map(dData[i], 0, max(dData), 0, dHeight);
+    // Balken nach Wert einfärben
     float gruen = map(dData[i], 0, max(dData), 0, 255);
-    
     fill(0, 255 - gruen, 255);
+    // Ein Balken Zeichnen
     rect(i * barWidth + dx, dy, barWidth, -value);
     
+    // Werte an die Balken schreiben
     fill(0);
     textAlign(CENTER, BOTTOM);
     text(dData[i], (i * barWidth + dx) + (barWidth / 2), dy + -value);
     
+    // Balken nach Stunden beschriften
     textAlign(CENTER, TOP);
     text(i, (i * barWidth + dx) + (barWidth / 2), dy + 3);
   }
