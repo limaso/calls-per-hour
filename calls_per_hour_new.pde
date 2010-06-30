@@ -60,30 +60,39 @@ void drawBarGraph(float dx, float dy, float dWidth, float dHeight, int[]dData) {
   text("Nach Stunden des Tages", width / 2, dy + 16);
 }
 
+// Funktion zum ausgeben der Daten in Form eines Kuchendiagramms
 void drawSimplePie(float dx, float dy, float dDiameter, int[]dData) {
   for(int i = 0; i < dData.length; i++) {
+    // Werte neu Mappen und Farbe errechnen
     float value = dData[i] / sum(dData) * 360;
     float gruen = dData[i] / sum(dData) * 255;
     
     fill(255, gruen, 0);
     arc(dx, dy, dDiameter, dDiameter, radians(start), radians(start + value));
     
-    float textPunkt = value / 2 + start;
-    if(textPunkt > 45 && textPunkt < 270) {
+    // von jedem Teilstück die hälfe des wertes (Kreisausschnitt) ausrechnen
+    // und danach ensprechend den Text anordnen
+    float textWinkel = value / 2 + start;
+    if(textWinkel > 45 && textWinkel < 270) {
       textAlign(CENTER, RIGHT);
     } else {
       textAlign(CENTER, LEFT);
     }
     
-    float textX = dx + cos(radians(textPunkt)) * dDiameter / 4;
-    float textY = dy + sin(radians(textPunkt)) * dDiameter / 4;
+    // Die Koordinaten des Textes im Kreis ausrechnen
+    float textX = dx + cos(radians(textWinkel)) * dDiameter / 4;
+    float textY = dy + sin(radians(textWinkel)) * dDiameter / 4;
     
+    // Beschriftung starten
     fill(0);
     font = createFont("Arial", 23);
     textFont(font);
+    
+    // Vereinfachung: wir wissen welches Element an welcher stelle kommt
     if(i == 0) text("called\r\n" + round(value / 3.6) + "%", textX, textY);
     if(i == 1) text("buzzed\r\n" + round(value / 3.6) + "%", textX, textY);
     
+    // Der neue Startwert ist der alte + des Wertes dieses Teilstückes =)
     start = start + value;
   }
 }
